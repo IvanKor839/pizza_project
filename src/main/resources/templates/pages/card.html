@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/personal_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Card</title>
+</head>
+<body>
+
+
+
+<div layout:fragment="personal_content">
+    <div class="content">
+        <div>
+            <h2>Your shopping card: </h2>
+            <br>
+        </div>
+
+        <div th:if="${!cards.getVisible()}">
+                <div>
+                    <h1>
+                        Nothing here!
+                    </h1>
+                </div>
+        </div>
+
+        <div th:unless="${!cards.getVisible()}" class="row">
+            <div class="col-sm-8">
+                <th:block th:each="card, iter : ${cards.getCardProductAdditions()}">
+                    <div class="row border rounded m-1">
+                        <div class="col-1" >
+                            <div th:text="${iter.count}"></div>
+                            <div><a class="fas fa-trash icon-dark" th:href="@{/}"></a></div>
+                        </div>
+
+                       <div class="col-3">
+                            <img th:src="@{${'/img/'+ card.getProduct().getPicture()}}" class="img-fluid" >
+                       </div>
+                        <div class="col-6">
+                            <div>
+                                <a th:href="@{'/personal/products/details' + ${card.getProduct().getId()}}">
+                                    <b th:text="${card.getProduct().getName()} + ' '+ (${card.getProduct().getSize() ne null} ? ${card.getProduct().getSize()}+ 'см'  : ' ')">
+                                    </b>
+                                </a>
+                            </div>
+                            <!--<div th:replace="quantity_control :: quantity_control(${card.getQuantity()} , ${card.getProduct().getId()})">Quantity</div>-->
+                            <div th:replace="quantity_control :: quantity_control(${card.getQuantity()} , ${card.getProduct().getId()}, ${card.getCard().getId()}, ${card.getAddition() ne null} ? ${card.getAddition().getId()} : 0, ${cards.getQuantity()})">Quantity</div>
+                            <div>
+                                <span>X</span>
+                                <span>[[${card.getProduct().getPrice()}]]₴</span>
+
+                            </div>
+                            <div>
+                                <span>=&nbsp;</span><span class="h4">₴</span>
+                                <span th:id="'subtotal'+ ${card.getProduct().getId()}"
+                                      class="h4 productSubtotal">[[${card.getTotal()}]]</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <a>Добавка:</a>
+                            <div th:text="${card.getAddition() ne null} ? ${card.getAddition().getName()} : '❌'">
+
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div th:text="${card.getAddition() ne null} ? ${card.getAddition().getPrice()}+'грн' : '❌'">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-1">&nbsp;</div>
+                </th:block>
+            </div>
+            <div class="col-sm-4">
+                <div>
+                    <span class="h3" > Підсумкова сума: </span>
+                </div>
+                <div class="mt-2">
+                    <!--<span class="h2" id="totalAmount"> [[${cards.getTotal()}]]₴</span>-->
+                    <span class="h2" id="totalAmount"><span>₴</span> [[${cards.getTotal()}]] </span>
+                </div>
+                <div class="mt-2">
+                    <a type="button" th:href="@{'/order/'+${cards}}" class="btn btn-danger p-3 mt-2"> Оформити замовлення</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script type="text/javascript" th:src="@{/js/quantity_control.js}"></script>
+</th:block>
+
+</body>
+</html>

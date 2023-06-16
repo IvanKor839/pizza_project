@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/data_table_layout}" xmlns:tr="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>products</title>
+</head>
+<body>
+
+<div layout:fragment="data_table_content">
+    <tr th:each="product,iter : ${pageData.getItems()}">
+        <td th:text="${iter.count}"></td>
+        <td>
+            <img th:src="@{${'/img/'+ product.getPicture()}}" width="45" height="45"/>
+        </td>
+        <td th:text="${product.getProductName()}"></td>
+        <td th:text="${product.getSize()}"></td>
+        <td th:text="${product.getWeight()}"></td>
+        <td th:text="${#calendars.format(product.getCreated(),'dd MMMM yyyy')}"></td>
+        <td th:text="${product.getPrice()}"></td>
+        <td>
+            <a th:href="@{'/personal/products/details' + ${product.getId()}}" type="button" class="btn btn-primary">details</a>
+        </td>
+        <td th:if="${product.getProductType().getType()}=='pizza'">
+            <a  type="button" id="buttonAdd2Card" class="btn btn-primary" data-toggle="modal" th:data-id="${product.getId()}"  th:data-name="${product.getProductName()}" data-target=".bd-example-modal-lg1">AddToCard</a>
+        </td>
+        <td th:unless="${product.getProductType().getType()}=='pizza'">
+            <a  type="button"  class="btn btn-primary" th:href="@{'/personal/products/add/'+${product.getId()} + '/0'}" >AddToCard</a>
+        </td>
+    </tr>
+    <div class ="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg1">
+            <div class="modal-content">
+                <div class="h4 text-center m-2">Додати до <div data-value="name"></div></div>
+
+                <div class="addition-modal">
+                    <div class="text-center">---------------------------------------------------------</div>
+                    <div th:each="addit,iter : ${addition.getItems()}">
+                        <div class="add-item m-1">
+                            <div class="text-center h5" >
+                                <a th:text="${addit.getName()}"></a>
+                            </div>
+                            <div class="text-center pb-2">
+                                <a th:text="'Ціна:'+${addit.getPrice()}+'грн.'"></a>
+                            </div>
+                            <a id="addToCard" th:href="@{'/personal/products/add/_id_/'+${addit.getId()}}">
+                                <button  type="submit" class="w-50 adition-btn btn btn-outline-danger add-add">
+                                    Додати
+                                </button>
+                            </a>
+                            <div class="add-info"></div>
+                        </div>
+                    </div>
+                    <div class="text-center">---------------------------------------------------------</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

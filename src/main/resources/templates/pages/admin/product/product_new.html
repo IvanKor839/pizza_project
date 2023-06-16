@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>New Product</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>New product</h4>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/admin/products/create}" th:object="${product}" method="post">
+                        <div class="form-group">
+                            <label for="productName">Product name</label>
+                            <input type="text" class="form-control" id="productName" aria-describedby="productName" placeholder="Enter product name" th:field="*{productName}">
+                        </div>
+                        <div class="form-group">
+                            <label for="productSize">Product size</label>
+                            <input type="number" class="form-control" id="productSize" aria-describedby="productSize" placeholder="Enter product size " th:field="*{size}">
+                        </div>
+                        <div class="form-group">
+                            <label for="productWeight">Product weight</label>
+                            <input type="number" class="form-control" id="productWeight" aria-describedby="productWeight" placeholder="Enter  product weight" th:field="*{weight}">
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Product price</label>
+                            <input type="number" class="form-control" id="productPrice" aria-describedby="productPrice" placeholder="Enter price" th:field="*{price}">
+                        </div>
+                        <div class="form-group">
+                            <label for="productType">Book description</label>
+                            <select class="form-control" id="productType" name="productType" th:field="*{productType}">
+                                <option value="0">select type</option>
+                                <option th:each="type : ${types}" th:value="${type.getId()}" th:text="${type.getType()}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImage">Product image url</label>
+                            <input type="text" class="form-control" id="productImage" aria-describedby="productImage" placeholder="Enter product image url" th:field="*{picture}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

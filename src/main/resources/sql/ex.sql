@@ -1,0 +1,1 @@
+INSERT INTO `product` (`id`, `created`, `updated`, `visible`,  `productType_id`,  `name`, `picture`, `price`, `weight`, `size`) VALUES (10, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), true, 2, 'Паста з сиром', 'паста.png', 200, 350,  NULL);
