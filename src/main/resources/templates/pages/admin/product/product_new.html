@@ -18,7 +18,7 @@
                     <h4>New product</h4>
                 </div>
                 <div class="card-body">
-                    <form action="#" th:action="@{/admin/products/create}" th:object="${product}" method="post">
+                    <form  method="post" th:action="@{/admin/products/create}" th:object="${product}"  enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="productName">Product name</label>
                             <input type="text" class="form-control" id="productName" aria-describedby="productName" placeholder="Enter product name" th:field="*{productName}">
@@ -36,7 +36,7 @@
                             <input type="number" class="form-control" id="productPrice" aria-describedby="productPrice" placeholder="Enter price" th:field="*{price}">
                         </div>
                         <div class="form-group">
-                            <label for="productType">Book description</label>
+                            <label for="productType">Product type</label>
                             <select class="form-control" id="productType" name="productType" th:field="*{productType}">
                                 <option value="0">select type</option>
                                 <option th:each="type : ${types}" th:value="${type.getId()}" th:text="${type.getType()}"></option>
@@ -46,7 +46,7 @@
                             <label for="productImage">Product image url</label>
                             <input type="text" class="form-control" id="productImage" aria-describedby="productImage" placeholder="Enter product image url" th:field="*{picture}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" value="Create Product">Submit</button>
                     </form>
                 </div>
             </div>

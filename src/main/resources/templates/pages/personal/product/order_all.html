@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/data_table_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>orders</title>
+</head>
+<body>
+
+<div layout:fragment="data_table_content">
+    <tr th:each="order,iter : ${pageData.getItems()}">
+        <td th:text="${iter.count}"></td>
+        <td th:text="${#calendars.format(order.getCreated(),'dd/MMM/yyyy HH:mm')}"></td>
+        <td th:text="${order.getActive()}"></td>
+        <td th:text="${order.getAdress()}"></td>
+        <td th:text="${order.getPaied()}"></td>
+        <td>
+            <a th:href="@{'/admin/orders/details' + ${order.getCard().getId()}}" >Сheck</a>
+        </td>
+    </tr>
+</div>
+
+</body>
+</html>

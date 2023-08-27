@@ -89,7 +89,7 @@ public class AdminOrderController extends AbstractController{
         try {
             Optional<Card> cards  = cardService.findById(Long.parseLong(id));
             model.addAttribute("cards", cards.get());
-            return "pages/admin/product/product_details";
+            return "pages/card_cheak";
         }catch (NumberFormatException e){
             throw new NumberFormatException("incorrect value id");
         }

@@ -10,17 +10,17 @@ import java.util.Set;
 @Entity(name = "ordered")
 public class Order extends BaseEntity{
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.LAZY)
     private Personal personal;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.LAZY)
     private Admin admin;
 
     private String adress;
 
     private Boolean isPaied;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id", referencedColumnName = "id")
     private Card card;
 

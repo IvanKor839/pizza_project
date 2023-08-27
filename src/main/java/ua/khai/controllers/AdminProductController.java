@@ -2,6 +2,7 @@ package ua.khai.controllers;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -40,7 +41,9 @@ public class AdminProductController extends AbstractController{
             new HeaderName("add", null, null)
     };
 
+    @Autowired
     private final ProductFacade productFacade;
+    @Autowired
     private final ProductTypeService productTypeService;
 
     public AdminProductController(ProductFacade productFacade, ProductTypeService productTypeService) {
@@ -72,7 +75,7 @@ public class AdminProductController extends AbstractController{
     }
 
     @PostMapping("/create")
-    public String createNewProduct(RedirectAttributes attributes, @ModelAttribute("product") ProductRequestDto dto, @RequestParam("file") MultipartFile file) {
+    public String createNewProduct(RedirectAttributes attributes, @ModelAttribute("product") ProductRequestDto dto) {
         productFacade.create(dto);
         return "redirect:/admin/products";
     }

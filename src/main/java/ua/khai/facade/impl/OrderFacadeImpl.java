@@ -32,10 +32,10 @@ public class OrderFacadeImpl implements OrderFacade {
     public void create(OrderRequestDto orderRequestDto) {
         Order order = new Order();
         order.setAdmin(orderRequestDto.getAdmin());
-        order.setActive(orderRequestDto.getActive());
+        order.setActive("В процесі");
         order.setAdress(orderRequestDto.getAdress());
         order.setPersonal(orderRequestDto.getPersonal());
-        order.setPaied(orderRequestDto.getPaied());
+        order.setPaied(true);
         order.setCard(orderRequestDto.getCard());
         orderService.create(order);
     }

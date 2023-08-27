@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity(name = "product")
 public class Product extends BaseEntity{
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.LAZY)
     private ProductType productType;
 
     private String name;

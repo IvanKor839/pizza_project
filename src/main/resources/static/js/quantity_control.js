@@ -37,7 +37,6 @@ function increaseQuantity(link){
 
     newQty = parseInt(qtyInput.val())+1;
     qtyCardInt = parseInt(qtyCard);
-    alert(qtyCardInt);
 
     if(newQty < 10) {
         qtyInput.val(newQty);

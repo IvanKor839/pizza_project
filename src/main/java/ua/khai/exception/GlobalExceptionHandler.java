@@ -11,7 +11,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.ModelAndView;
 
 
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = {EntityNotFoundException.class})

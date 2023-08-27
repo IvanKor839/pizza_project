@@ -14,19 +14,11 @@
 <div layout:fragment="personal_content">
     <div class="content">
         <div>
-            <h2>Your shopping card: </h2>
+            <h2>Your cheak: </h2>
             <br>
         </div>
 
-        <div th:if="${!cards.getVisible()}">
-                <div>
-                    <h1>
-                        Nothing here!
-                    </h1>
-                </div>
-        </div>
-
-        <div th:unless="${!cards.getVisible()}" class="row">
+        <div  class="row">
             <div class="col-sm-8">
                 <th:block th:each="card, iter : ${cards.getCardProductAdditions()}">
                     <div class="row border rounded m-1">
@@ -81,9 +73,6 @@
                 <div class="mt-2">
                     <!--<span class="h2" id="totalAmount"> [[${cards.getTotal()}]]₴</span>-->
                     <span class="h2" id="totalAmount"><span>₴</span> [[${cards.getTotal()}]] </span>
-                </div>
-                <div class="mt-2">
-                    <a type="button" th:href="@{'/order/'+${cards.getId()}}" class="btn btn-danger p-3 mt-2"> Оформити замовлення</a>
                 </div>
             </div>
         </div>
